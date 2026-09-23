@@ -16,8 +16,15 @@ app = Flask(__name__);
 def home():
     return render_template('home.html');
 
+@app.route('/hello')
+def hello():
+    name = '길동이';
+    addr = '서초구 서초2동 123번지';
+    return render_template('hello.html',name=name, juso=addr);
+
+@app.route('/world')
+def world_image():
+    return render_template('my.html');
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5500);
-
-git확인
