@@ -13,7 +13,10 @@ def loginFunc():
     visits = request.cookies.get('visits')
 
     if name:
-        visits = int(visits or '0') +1
+        try:
+            visits = max(0, int(visits or '0')) + 1
+        except ValueError:
+            visits = 1
         msg = f'안녕하세요. {name}님 {visits}번째 방문입니다'
     else:
         visits = None

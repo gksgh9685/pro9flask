@@ -49,9 +49,11 @@ def show_list():
 
     except pymysql.err.IntegrityError as e:
         print(e)
+        return "상품 목록 조회에 실패했습니다.", 500
 
     except Exception as e2:
         print(e2)
+        return "상품 목록 조회에 실패했습니다.", 500
 
     finally:
         conn.close()
@@ -69,7 +71,7 @@ def add_save():   # 추가 처리
 
 
     # 서버에서도 클라이언트가 전달한 입력자료 검사 
-    if not sang or not su_raw.isdigit() or not dan_raw.isdigit():
+    if not sang or not su_raw.isdecimal() or not dan_raw.isdecimal():
         flash("sang은 필수, su, dan은 숫자만 가능")
         return redirect(url_for("add_form"))
 
@@ -114,14 +116,14 @@ def edit_form(code:int):    # 수정 폼 호출
             return redirect(url_for("show_list"))
 
         messages = list(get_flashed_messages())
-        return render_template("form_edit.html",row=row, messages=messages)
+        return render_template("form_add.html",row=row, messages=messages)
 
     finally:
         conn.close()
 
 
 
-@app.post('/edit<int:code>')
+@app.post('/edit/<int:code>/')
 def edit_save(code:int):  # 수정 처리
     sang = (request.form.get("sang") or "").strip()
     su_raw = (request.form.get("su") or "").strip()
@@ -129,7 +131,7 @@ def edit_save(code:int):  # 수정 처리
     
     
     # 서버에서도 클라이언트가 전달한 입력자료 검사 
-    if not sang or not su_raw.isdigit() or not dan_raw.isdigit():
+    if not sang or not su_raw.isdecimal() or not dan_raw.isdecimal():
         flash("sang은 필수, su, dan은 숫자만 가능")
         return redirect(url_for("edit_form",code=code))
     

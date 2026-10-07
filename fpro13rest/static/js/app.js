@@ -28,6 +28,7 @@ $("#sendBtn").addEventListener("click", async() => {  // 비동기 처리
 
         if(!res.ok || data.ok === false){
             $("#result").innerHTML = `<span class="error">에러 : ${data.error}</span>`;
+            return;
         }
 
         // 요청 성공인 경우

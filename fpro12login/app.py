@@ -39,7 +39,7 @@ def login_post():
     jikwonno_raw = (request.form.get("jikwonno") or "").strip()
     jikwonname = (request.form.get("jikwonname") or "").strip()
 
-    if not jikwonno_raw.isdigit() or not jikwonname:
+    if not jikwonno_raw.isdecimal() or not jikwonname:
         flash("직원 번호는 숫자, 직원 이름은 필수입니다")
         return redirect(url_for("login_form"))
 

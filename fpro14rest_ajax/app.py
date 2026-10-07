@@ -9,11 +9,11 @@ def index():
 
 @app.get("/legacy")
 def legacy_f():
-    pass    # 생략
+    return "legacy 방식은 아직 구현하지 않았습니다.", 501
 
 @app.get("/async")
 def async_f():
-    pass    # 생략
+    return "async 방식은 아직 구현하지 않았습니다.", 501
 
 @app.get("/fetch")
 def fetch_f():

@@ -3,8 +3,8 @@ const btnOne = document.querySelector("#btnOne");
 const btnBuser = document.querySelector("#btnBuser");
 const btnBuserPart = document.querySelector("#btnBuserPart");
 
-const Jikwonno = document.querySelector("#Jikwonno");
-const Buserno = document.querySelector("#Buserno");
+const jikwonno = document.querySelector("#jikwonno");
+const Buserno = document.querySelector("#buserno");
 
 const msg = document.querySelector("#msg");
 const tbody = document.querySelector("#tbody");
@@ -50,8 +50,45 @@ async function loadJikwon(){
     const res = await fetch("/acorn/jikwon");
     const mydata = await res.json();
     makeTable(mydata.data);
-
     setMsg("전체 직원 조회 완료")
 }
 
+// 전체 부서
+async function loadBuser(){
+    const res = await fetch("/acorn/buser");
+    const mydata = await res.json();
+    makeTable(mydata.data);
+    setMsg("전체 부서 조회 완료")
+}
+
+// 직원 1명
+async function loadOne(){
+    const no = jikwonno.value;
+    // const res = await fetch("/acorn/jikwon/" + no);
+    const res = await fetch("/acorn/jikwon/" + no, {
+        method:"GET"
+    });
+    const mydataOne = await res.json();
+    makeTable([mydataOne.data]);
+    setMsg("직원 1명 조회 완료");
+}
+
+// 특정 부서
+async function loadBuserPart(){
+    const no = Buserno.value;
+    // const res = await fetch("/acorn/jikwon/" + no);
+    const res = await fetch("/acorn/buser/" + no, {
+        method:"GET"
+    });
+    const mydataOne = await res.json();
+    makeTable(mydataOne.data);
+    setMsg("특정 부서 조회 완료");
+}
+
+
 btnJikwon.onclick = loadJikwon;   // 괄호 치지말고 함수의 결과를 넘겨줘야 함
+btnBuser.onclick = loadBuser;
+btnOne.onclick = loadOne;
+btnBuserPart.onclick = loadBuserPart;
+
+

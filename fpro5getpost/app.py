@@ -14,6 +14,8 @@ def get_form():
 def get_result():
     name = request.args.get('username') # get 방식 요청 자료 받기
     age = request.args.get('age')       # '23' 문자 타입으로만 받기
+    if age is None or not age.isdecimal():
+        return "나이를 숫자로 입력하세요.", 400
     age = age + '살'
     return render_template('get_result.html', name=name, age=age)
 

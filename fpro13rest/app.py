@@ -14,7 +14,7 @@ def api_friendFunc():
     if not name:
         return jsonify({"ok":False,"error":"name is required"}), 400   # 400:Bad Request
 
-    if not age_str.isdigit():
+    if not age_str.isdecimal():
         return jsonify({"ok":False,"error":"age is required"}), 400
 
     age = int(age_str)
