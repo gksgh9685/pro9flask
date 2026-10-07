@@ -75,9 +75,9 @@ async function loadOne(){
 
 // 특정 부서
 async function loadBuserPart(){
-    const no = Buserno.value;
+    const Bno = Buserno.value;
     // const res = await fetch("/acorn/jikwon/" + no);
-    const res = await fetch("/acorn/buser/" + no, {
+    const res = await fetch("/acorn/buser/" + Bno, {
         method:"GET"
     });
     const mydataOne = await res.json();
